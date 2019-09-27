@@ -28,7 +28,7 @@ class DetailButton extends React.Component {
     render(){
         if (!this.state.showDetailButton)
         return(
-            <View style={{alignSelf:'flex-start',width:120}}>
+            <View style={{alignSelf:'flex-start'}}>
                 <Button onPress={()=>{
                         this.showDetailButton(true);
                     }} title={this.state.title} color='skyblue'/>
@@ -36,7 +36,7 @@ class DetailButton extends React.Component {
         );
         else {
             return(
-                <View style={{width:120}}>
+                <View style={{}}>
                     <Button onPress={()=>{
                             this.showDetailButton(false);
                         }} title="flexDirection" color='skyblue'/>
@@ -86,7 +86,7 @@ class DetailButton2 extends React.Component {
     render(){
         if (!this.state.showDetailButton)
         return(
-            <View style={{width:120}}>
+            <View style={{}}>
                 <Button onPress={()=>{
                     this.showDetailButton(true);
                 }} title={this.state.title} color='skyblue'/>
@@ -94,7 +94,7 @@ class DetailButton2 extends React.Component {
         );
         else {
             return(
-                <View style={{width:120}}>
+                <View style={{justifyContent:'space-around',flexWrap:'wrap'}}>
                 <Button onPress={()=>{
                     this.showDetailButton(false);
                 }} title="justifyContent" color='skyblue'/>
@@ -119,6 +119,10 @@ class DetailButton2 extends React.Component {
                         this.setJustifyContent("space-around");
                         this.showDetailButton(false);
                     }} title="space-around" color='skyblue'/>
+                    <Button onPress={()=>{
+                        this.setJustifyContent("space-evenly");
+                        this.showDetailButton(false);
+                    }} title="space-evenly" color='skyblue'/>
                 </View>
             );
         }
@@ -149,7 +153,7 @@ class DetailButton3 extends React.Component {
     render(){
         if (!this.state.showDetailButton)
         return(
-            <View style={{width:120}}>
+            <View style={{}}>
                 <Button onPress={()=>{
                     this.showDetailButton(true);
                 }} title={this.state.title} color='skyblue'/>
@@ -157,7 +161,7 @@ class DetailButton3 extends React.Component {
         );
         else {
             return(
-                <View style={{width:120}}>
+                <View style={{}}>
                 <Button onPress={()=>{
                     this.showDetailButton(false);
                 }} title="alignItems" color='skyblue'/>
@@ -178,9 +182,55 @@ class DetailButton3 extends React.Component {
                         this.setAlignItems("stretch");
                         this.showDetailButton(false);
                     }} title="stretch" color='skyblue'/>
+                    <Button onPress={()=>{
+                        this.setAlignItems("baseline");
+                        this.showDetailButton(false);
+                    }} title="baseline" color='skyblue'/>
                 </View>
             );
         }
+    }
+}
+
+class WrapButton extends React.Component {
+
+    state = {
+        showButton:false,
+    }
+
+    setWrap(wrap) {
+        this.setState({
+            showButton:false,
+        })
+        window.layoutView.setState({
+            flexWrap:wrap,
+        })
+    }
+    render(){
+        if (!this.state.showButton)
+        return (
+            <View >
+                <Button onPress={()=>{
+                        this.setState({
+                            showButton:true,
+                            //wrap:!this.state.wrap,
+                        })
+                    }} title="change wrap"/>
+            </View>
+        );
+        else return (
+            <View style={{flexDirection:'row',justifyContent:'space-around'}}>
+                <Button onPress={()=>{
+                    this.setWrap('wrap');
+                    }} title="wrap" color='skyblue'/>
+                <Button onPress={()=>{
+                    this.setWrap('nowrap');
+                    }} title="nowrap" color='skyblue'/>
+                <Button onPress={()=>{
+                    this.setWrap('wrap-reverse');
+                    }} title="wrap-reverse" color='skyblue'/>
+            </View>
+        );
     }
 }
 
@@ -198,7 +248,7 @@ export default class Layout extends React.Component{
 
       state = {
           flexDirection:'row',
-          wrap:'wrap',
+          flexWrap:'wrap',
           justifyContent:'flex-start',
           alignItems:'stretch',
       }
@@ -206,14 +256,10 @@ export default class Layout extends React.Component{
         return(
             <View style={{top:20}}>
                 <View style={{height:40}}>
-                <Button onPress={()=>{
-                    this.setState({
-                        wrap:!this.state.wrap,
-                    })
-                }} title="change wrap"/>
+                <WrapButton/>
                 </View>
-                <View ref="layoutView" style={{flexDirection:this.state.flexDirection,flexWrap:this.state.wrap,justifyContent:this.state.justifyContent,alignItems:this.state.alignItems,height:360}} >
-                    <View style={{width:80,backgroundColor:'green',justifyContent:'center'}}>
+                <View ref="layoutView" style={{flexDirection:this.state.flexDirection,flexWrap:this.state.flexWrap,justifyContent:this.state.justifyContent,alignItems:this.state.alignItems,height:360}} >
+                    {/* <View style={{width:80,backgroundColor:'green',justifyContent:'center'}}>
                         <Text style={{alignSelf:'center',fontSize:24}}>1</Text>
                     </View>
                     <View style={{width:80,height:40,backgroundColor:'red',justifyContent:'center'}}>
@@ -230,10 +276,28 @@ export default class Layout extends React.Component{
                     </View>
                     <View style={{width:80,height:40,backgroundColor:'blue',justifyContent:'center'}}>
                         <Text style={{alignSelf:'center',fontSize:24}}>6</Text>
+                    </View> */}
+                    <View style={{width:80,backgroundColor:'green',justifyContent:'center'}}>
+                        <Text style={{alignSelf:'center',fontSize:24}}>1</Text>
                     </View>
+                    <View style={{width:80,height:40,backgroundColor:'red',justifyContent:'center'}}>
+                        <Text style={{alignSelf:'center',fontSize:24}}>2</Text>
+                    </View>
+                    <View style={{width:80,height:80,backgroundColor:'green',justifyContent:'center'}}>
+                        <Text style={{alignSelf:'center',fontSize:24}}>3</Text>
+                    </View>
+                    <View style={{width:80,height:100,backgroundColor:'red',justifyContent:'center'}}>
+                        <Text style={{alignSelf:'center',fontSize:24}}>4</Text>
+                    </View>
+                    {/* <View style={{width:80,height:30,backgroundColor:'blue',justifyContent:'center'}}>
+                        <Text style={{alignSelf:'center',fontSize:24}}>5</Text>
+                    </View>
+                    <View style={{width:80,height:40,backgroundColor:'blue',justifyContent:'center'}}>
+                        <Text style={{alignSelf:'center',fontSize:24}}>6</Text>
+                    </View> */}
                 </View>
                 <View style={{height:20}}/>
-                <View style={{flexDirection:'row',justifyContent:'center',alignItems:'flex-start'}}>
+                <View style={{flexDirection:'row',justifyContent:'space-around',alignItems:'flex-start'}}>
                     <DetailButton/>
                     <DetailButton2/>
                     <DetailButton3/>
