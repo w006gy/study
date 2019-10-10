@@ -1,11 +1,9 @@
 {
-"applinks": {
-        "apps": [],
-        "details": [
-            {
-                "appID": "63M9FZGR9Q.com.hand.hippiusDevelop”,
-                "paths": ["/deaplink","*"]
-            }
-        ]
-    }
+	"applinks": {
+		"apps": [],
+		"details": [{
+			"appID": "63M9FZGR9Q.com.hand.hippiusDevelop",
+			"paths": ["/deaplink", "*"]
+		}]
+	}
 }
